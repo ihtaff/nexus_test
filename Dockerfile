@@ -1,17 +1,14 @@
 # Use an official Node.js runtime as the base image
-FROM node:14
+FROM node:14-alpine
 
-# Set the working directory in the image file system
+# Set the working directory to /app
 WORKDIR /app
 
-# Copy the package.json and package-lock.json files to the working directory
-COPY package*.json ./
+# Copy the application source code to the Docker image
+COPY . /app
 
-# Install the dependencies
+# Install the application dependencies
 RUN npm install
 
-# Copy the application source code to the working directory
-COPY . .
-
-# Specify the command to run the application when the image is started as a container
-CMD [ "npm", "start" ]
+# Set the default command to run when the container starts
+CMD ["npm", "start"]
